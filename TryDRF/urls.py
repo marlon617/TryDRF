@@ -23,6 +23,7 @@ urlpatterns = [
     #url(r'^publishers/$', views.publisher_list),
     #url(r'^publishers/(?P<pk>[0-9]+)$', views.publisher_detail),
     path('', include('app01.urls')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
 
 ]
