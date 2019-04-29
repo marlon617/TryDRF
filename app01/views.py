@@ -8,9 +8,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import mixins
 from rest_framework import generics
+from rest_framework import permissions
+
 
 from app01 import models
 from app01 import serializers
+from app01.permissions import IsOwnerOrReadOnly
 
 # 第一种
 # class PublisherList(APIView):
@@ -50,7 +53,10 @@ from app01 import serializers
 class PublisherList(generics.ListCreateAPIView):
     queryset = models.Publisher.objects.all()
     serializer_class = serializers.PublisherSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
+    def perform_create(self, serializer):
+        serializer.save(operator=self.request.user)
 
 # 第一种
 # class PublisherDetail(APIView):
@@ -110,3 +116,4 @@ class PublisherDetail(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = models.Publisher.objects.all()
     serializer_class = serializers.PublisherSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
