@@ -16,8 +16,8 @@ from . import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
-    url(r'^publishers/$', views.publisher_list),
-    url(r'^publishers/(?P<pk>[0-9]+)$', views.publisher_detail),
+    url(r'^publishers/$', views.PublisherList.as_view()),
+    url(r'^publishers/(?P<pk>[0-9]+)$', views.PublisherDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
