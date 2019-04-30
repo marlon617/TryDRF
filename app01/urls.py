@@ -15,6 +15,8 @@ from django.urls import path,include
 from . import views
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.routers import DefaultRouter
+from rest_framework.schemas import get_schema_view
+from rest_framework.documentation import include_docs_urls
 
 # #明确地将ViewSets绑定到URL
 # book_list = views.BookViewSet.as_view({
@@ -35,11 +37,14 @@ router.register(r'books', views.BookViewSet)
 router.register(r'publishers', views.PublisherViewSet)
 
 
+scheam_view = get_schema_view(title='Pastebin API')
 
 
 urlpatterns = [
     # url(r'^$', views.api_root),
     url(r'^', include(router.urls)),
+    url('^schema/$', scheam_view),
+    url(r'docs/', include_docs_urls(title="图书管理系统")),
     # url(r'^publishers/$', views.PublisherList.as_view(), name='publisher-list'),
     # url(r'^publishers/(?P<pk>[0-9]+)$', views.PublisherDetail.as_view(), name='publisher-detail'),
     # url(r'^books/$', views.BookList.as_view(), name='book-list'),
