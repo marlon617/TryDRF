@@ -33,10 +33,35 @@ from app01 import models
 
 
 class PublisherSerializer(serializers.ModelSerializer):
+    operator = serializers.ReadOnlyField(source='operator.username')
+
     class Meta:
         model = models.Publisher
         fields = (
             "id",
             "name",
-            "address"
+            "address",
+            "operator"
+        )
+
+# class BookSerializer(serializers.ModelSerializer):
+#     publisher = serializers.StringRelatedField(source="publisher.name")
+#
+#     class Meta:
+#         model = models.Book
+#         fields = (
+#             "id",
+#             "title",
+#             "publisher"
+#         )
+
+#超链接
+class BookSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = models.Book
+        fields = (
+            "id",
+            "title",
+            "publisher"
         )
