@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf.urls import url
 
+from app01 import views
 
 urlpatterns = [
+    #url(r'^publishers/$', views.publisher_list),
+    #url(r'^publishers/(?P<pk>[0-9]+)$', views.publisher_detail),
     path('', include('app01.urls')),
     path('admin/', admin.site.urls),
 
